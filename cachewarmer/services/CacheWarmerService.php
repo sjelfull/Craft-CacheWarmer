@@ -7,7 +7,7 @@ use \Guzzle\Http\Client as Guzzle;
 
 class CacheWarmerService extends BaseApplicationComponent
 {
-    protected $settings = [];
+    protected $settings = array();
 
     function __construct()
     {
@@ -40,7 +40,7 @@ class CacheWarmerService extends BaseApplicationComponent
         // Fetch entries
         $entries = $criteria->find();
 
-        $urls = [];
+        $urls = array();
 
         // Get url's
         foreach($entries as $entry) {
