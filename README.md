@@ -1,6 +1,6 @@
 ## Cache Warmer plugin for Craft
 
-Allows you to fire off one request to warm up your cache for selection sections.
+Allows you to fire off one request to warm up your cache for selected sections.
 
 ### Usage
 
