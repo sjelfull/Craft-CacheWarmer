@@ -1,0 +1,80 @@
+{% import '_includes/forms' as forms %}
+{% set docsUrl = 'http://buildwithcraft.com/docs/sections-and-entries#sections' %}
+
+{{ forms.textField({
+label: "Key"|t,
+id: 'key',
+name: 'key',
+instructions: "The key that will verify calls to the plugin. This must be set for calls to work."|t,
+value: settings.key,
+autofocus: true,
+errors: settings.getErrors('key')
+}) }}
+
+{{ forms.textField({
+label: "Parallel requests"|t,
+id: 'parallelRequests',
+name: 'parallelRequests',
+instructions: "How many url's to call in parallel"|t,
+value: settings.parallelRequests,
+autofocus: true,
+errors: settings.getErrors('parallelRequests')
+}) }}
+
+
+{% set key = settings.key ? settings.key : '1234567890' %}
+
+
+    <div id="nosections"{% if sections %} class="hidden"{% endif %}>
+        <p>{{ "No sections exist yet."|t }}</p>
+    </div>
+
+    {% if sections|length %}
+        <table id="sections" class="data fullwidth collapsible">
+            <thead>
+                <th scope="col" class="thin">Include</td>
+                <th scope="col">{{ "Name"|t }}</th>
+                <th scope="col">{{ "Entries"|t }}</th>
+                <th scope="col">{{ "URL Format"|t }}</th>
+            </thead>
+            <tbody>
+                {% for section in sections %}
+                    {% set handle = section.handle %}
+                    {% set sectionSettings = settings.enabledSections[handle] is defined ? settings.enabledSections[handle] : false %}
+                    <tr data-id="{{ section.id }}" data-name="{{ section.name|t }}">
+                        <td class="thin">
+                            {% set fieldname = 'enabledSections[' ~ handle ~ '][enabled]' %}
+                            {% set enabled = (sectionSettings.enabled is defined and sectionSettings.enabled is not empty ? sectionSettings.enabled : false) %}
+                            {{ forms.lightswitch({
+                                name: fieldname,
+                                on:   enabled,
+                            }) }}
+                        </td>
+                        <th scope="row" data-title="{{ 'Name'|t }}"><a href="{{ url('settings/sections/' ~ section.id) }}">{{ section.name|t }}</a></th>
+                        <td data-title="{{ 'Entries'|t }}">{{ sectionCount[handle] }}</td>
+                        <td data-title="{{ 'URL Format'|t }}" dir="ltr">
+                            {%- if section.isHomepage() -%}
+                                <div data-icon="home" title="{{ 'Homepage'|t }}"></div>
+                            {%- else -%}
+                                {{ section.getUrlFormat() }}
+                            {%- endif -%}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    <hr>
+
+    <h2>Examples</h2>
+
+    <p>Simply create a GET or a POST request to the action URL.</p>
+
+    <h3>Template</h3>
+
+    <code>{{ "{{ siteUrl(craft.config.get('actionTrigger') ~ '/cachewarmer/fire', { key: '" ~ key ~ "' }) }}"|raw }}</code>
+
+    <h3>URL</h3>
+
+    <code>{{ siteUrl(craft.config.get('actionTrigger') ~ '/cachewarmer/fire', { key: key }) }}</code>
