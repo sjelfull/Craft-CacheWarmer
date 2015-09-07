@@ -8,6 +8,12 @@ After clearing your cache, fire off a request to yoururl.com/actions/cacheWarmer
 
 The plugin uses Guzzle to fire off a batch of x requests to the urls of entries fetched from sections specified in the plugin settings.
 
+## Future plans
+
+- Add locale support (currently hardcoded to *en*)
+- Incorporate Cache Clear (need to check with Jason first)
+- Support cache warming of single entries when they are updated
+
 ## License
 
 [MIT](http://opensource.org/licenses/mit-license.php)
