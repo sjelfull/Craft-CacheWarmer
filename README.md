@@ -13,6 +13,7 @@ The plugin uses Guzzle to fire off a batch of x requests to the urls of entries 
 - Add locale support (currently hardcoded to *en*)
 - Incorporate Cache Clear (need to check with Jason first)
 - Support cache warming of single entries when they are updated
+- Support cache warming of specific cache key (You need to supply which url to call after clearing, though)
 
 ## License
 
