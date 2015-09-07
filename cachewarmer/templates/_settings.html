@@ -73,8 +73,8 @@ errors: settings.getErrors('parallelRequests')
 
     <h3>Template</h3>
 
-    <code>{{ "{{ siteUrl(craft.config.get('actionTrigger') ~ '/cachewarmer/fire', { key: '" ~ key ~ "' }) }}"|raw }}</code>
+    <code>{{ "{{ siteUrl(craft.config.get('actionTrigger') ~ '/cacheWarmer/fire', { key: '" ~ key ~ "' }) }}"|raw }}</code>
 
     <h3>URL</h3>
 
-    <code>{{ siteUrl(craft.config.get('actionTrigger') ~ '/cachewarmer/fire', { key: key }) }}</code>
+    <code>{{ siteUrl(craft.config.get('actionTrigger') ~ '/cacheWarmer/fire', { key: key }) }}</code>
