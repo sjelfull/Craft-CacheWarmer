@@ -4,6 +4,7 @@ namespace Craft;
 use \Guzzle\Batch\Batch;
 use \Guzzle\Batch\BatchRequestTransfer;
 use \Guzzle\Http\Client as Guzzle;
+use \Guzzle\Batch\ExceptionBufferingBatch;
 
 class CacheWarmerService extends BaseApplicationComponent
 {
@@ -47,8 +48,7 @@ class CacheWarmerService extends BaseApplicationComponent
             $urls[] = $entry->getUrl();
         }
 
-        
-        try 
+        try
         {
             // Create client
             $client = new Guzzle();
@@ -57,26 +57,32 @@ class CacheWarmerService extends BaseApplicationComponent
             $transferStrategy = new BatchRequestTransfer($this->settings->parallelRequests);
             $divisorStrategy = $transferStrategy;
             $batch = new Batch($transferStrategy, $divisorStrategy);
+            // Buffer exceptions
+            $batch = new ExceptionBufferingBatch($batch);
 
             // Create requests for every url and add them to the batch
             foreach($urls as $url) {
-                $batch->add( $client->get($url) );
+                $batch->add( $client->get($url, [], ['verify' => ! CRAFT_ENVIRONMENT === 'local']) );
             }
 
             // Flush the queue and retrieve the flushed items
             $arrayOfTransferredRequests = $batch->flush();
         }
-        catch (\Guzzle\Http\Exception\CurlException $e) 
+        catch (\Guzzle\Http\Exception\CurlException $e)
         {
             // Throw a craft exception which displays the error cleanly
             throw new HttpException(400, '(Cache Warmer) Internet connection not available');
         }
+
+        foreach ($batch->getExceptions() as $e) {
+            if ( ! preg_match('/\[status code\] 404/', $e->getMessage())) {
+                throw $e;
+            }
+        }
     }
-    
+
     public function isEnabledForSection($sectionHandle)
     {
         return !empty($this->settings->enabledByDefault[$sectionHandle]);
     }
 }
-
-//
