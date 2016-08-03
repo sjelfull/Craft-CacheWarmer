@@ -31,7 +31,7 @@ class CacheWarmerService extends BaseApplicationComponent
 
         // Get elements
         $criteria = craft()->elements->getCriteria(ElementType::Entry);
-        $criteria->setLanguage('en');
+        $criteria->setLanguage('en_us');
         $criteria->section = $sectionHandles;
 
         // Get entries count
