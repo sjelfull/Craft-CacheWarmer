@@ -15,7 +15,7 @@ The plugin uses Guzzle to fire off a batch of x requests to the urls of entries 
 - Support cache warming of single entries when they are updated
 - Support cache warming of specific cache key (You need to supply which url to call after clearing, though)
 - Support Commerce products
-- Make clearning more performant and robust
+- Make clearing more performant and robust
 
 ## License
 
