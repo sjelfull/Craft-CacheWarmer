@@ -12,7 +12,7 @@ class CacheWarmerService extends BaseApplicationComponent
     function __construct()
     {
         $plugin = craft()->plugins->getPlugin('cachewarmer');
-        if ( ! $plugin)
+        if (!$plugin)
         {
             throw new Exception('Couldn’t find the Cache Warmer plugin!');
         }
@@ -47,8 +47,7 @@ class CacheWarmerService extends BaseApplicationComponent
             $urls[] = $entry->getUrl();
         }
 
-        
-        try 
+        try
         {
             // Create client
             $client = new Guzzle();
@@ -78,5 +77,3 @@ class CacheWarmerService extends BaseApplicationComponent
         return !empty($this->settings->enabledByDefault[$sectionHandle]);
     }
 }
-
-//

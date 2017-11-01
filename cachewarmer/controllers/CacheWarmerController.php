@@ -6,18 +6,17 @@ namespace Craft;
  */
 class CacheWarmerController extends BaseController
 {
-	/**
-	 * @var Allows anonymous access to this controller's actions.
-	 * @access protected
-	 */
-	protected $allowAnonymous = array('actionFire');
+    /**
+     * @var Allows anonymous access to this controller's actions.
+     * @access protected
+     */
+    protected $allowAnonymous = array('actionFire');
 
     /**
      * Handle the action to clear the cache.
      */
     public function actionFire()
     {
-        
         $settings = $this->getSettings();
 
         $key = craft()->request->getParam('key');

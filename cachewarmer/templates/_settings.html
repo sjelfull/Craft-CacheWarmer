@@ -2,28 +2,26 @@
 {% set docsUrl = 'http://buildwithcraft.com/docs/sections-and-entries#sections' %}
 
 {{ forms.textField({
-label: "Key"|t,
-id: 'key',
-name: 'key',
-instructions: "The key that will verify calls to the plugin. This must be set for calls to work."|t,
-value: settings.key,
-autofocus: true,
-errors: settings.getErrors('key')
+    label: "Key"|t,
+    id: 'key',
+    name: 'key',
+    instructions: "The key that will verify calls to the plugin. This must be set for calls to work."|t,
+    value: settings.key,
+    autofocus: true,
+    errors: settings.getErrors('key')
 }) }}
 
 {{ forms.textField({
-label: "Parallel requests"|t,
-id: 'parallelRequests',
-name: 'parallelRequests',
-instructions: "How many url's to call in parallel"|t,
-value: settings.parallelRequests,
-autofocus: true,
-errors: settings.getErrors('parallelRequests')
+    label: "Parallel requests"|t,
+    id: 'parallelRequests',
+    name: 'parallelRequests',
+    instructions: "How many url's to call in parallel"|t,
+    value: settings.parallelRequests,
+    autofocus: true,
+    errors: settings.getErrors('parallelRequests')
 }) }}
 
-
 {% set key = settings.key ? settings.key : '1234567890' %}
-
 
     <div id="nosections"{% if sections %} class="hidden"{% endif %}>
         <p>{{ "No sections exist yet."|t }}</p>
