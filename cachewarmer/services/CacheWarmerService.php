@@ -12,7 +12,7 @@ class CacheWarmerService extends BaseApplicationComponent
     function __construct()
     {
         $plugin = craft()->plugins->getPlugin('cachewarmer');
-        if ( ! $plugin)
+        if (!$plugin)
         {
             throw new Exception('Couldn’t find the Cache Warmer plugin!');
         }
@@ -20,6 +20,8 @@ class CacheWarmerService extends BaseApplicationComponent
     }
 
     public function warmCache() {
+        $urls = array();
+
         // Only include enabled sections
         $enabledSections = array_filter($this->settings->enabledSections, function($item)
         {
@@ -31,24 +33,38 @@ class CacheWarmerService extends BaseApplicationComponent
 
         // Get elements
         $criteria = craft()->elements->getCriteria(ElementType::Entry);
-        $criteria->setLanguage('en');
         $criteria->section = $sectionHandles;
-
-        // Get entries count
-        $count = $criteria->count();
-
-        // Fetch entries
         $entries = $criteria->find();
 
-        $urls = array();
-
-        // Get url's
         foreach($entries as $entry) {
             $urls[] = $entry->getUrl();
         }
 
-        
-        try 
+        // Check for commerce
+        $commercePlugin = craft()->plugins->getPlugin('commerce');
+
+        if ($commercePlugin)
+        {
+            // Only include enabled product types
+            $enabledProductTypes = array_filter($this->settings->enabledProductTypes, function($item)
+            {
+                if (!empty($item['enabled'])) return true;
+            });
+
+            // Put product type ids into an array
+            $productTypeIds = array_keys($enabledProductTypes);
+
+            // Get products
+            $criteria = craft()->elements->getCriteria('Commerce_Product');
+            $criteria->typeId = $productTypeIds;
+            $products = $criteria->find();
+
+            foreach($products as $product) {
+                $urls[] = $product->getUrl();
+            }
+        }
+
+        try
         {
             // Create client
             $client = new Guzzle();
@@ -72,11 +88,14 @@ class CacheWarmerService extends BaseApplicationComponent
             throw new HttpException(400, '(Cache Warmer) Internet connection not available');
         }
     }
-    
+
     public function isEnabledForSection($sectionHandle)
     {
         return !empty($this->settings->enabledByDefault[$sectionHandle]);
     }
-}
 
-//
+    public function isEnabledForProductType($productTypeId)
+    {
+        return !empty($this->settings->enabledProductTypes[$productTypeId]);
+    }
+}

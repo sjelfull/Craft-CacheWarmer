@@ -1,6 +1,6 @@
 ## Cache Warmer plugin for Craft
 
-Allows you to fire off one request to warm up your cache for selected sections.
+Allows you to fire off one request to warm up your cache for selected sections or commerce product types.
 
 ### Usage
 
@@ -14,10 +14,8 @@ The plugin uses Guzzle to fire off a batch of x requests to the urls of entries 
 - Incorporate Cache Clear (need to check with Jason first)
 - Support cache warming of single entries when they are updated
 - Support cache warming of specific cache key (You need to supply which url to call after clearing, though)
-- Support Commerce products
 - Make clearing more performant and robust
 
 ## License
 
 [MIT](http://opensource.org/licenses/mit-license.php)
-
