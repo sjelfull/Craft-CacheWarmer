@@ -47,6 +47,7 @@ class CacheWarmerPlugin extends BasePlugin
     {
         return array(
             'enabledSections' => AttributeType::Mixed,
+            'enabledProductTypes' => AttributeType::Mixed,
             'key' => array(
                 AttributeType::String,
                 'required' => true
@@ -81,10 +82,34 @@ class CacheWarmerPlugin extends BasePlugin
             $sectionCount[$section->handle] = $count;
         }
 
+        $commercePlugin = craft()->plugins->getPlugin('commerce');
+
+        if ($commercePlugin)
+        {
+            $editableProductTypes = array();
+            $productTypes = array();
+            $allProductTypes = craft()->commerce_productTypes->getAllProductTypes();
+
+            foreach ($allProductTypes as $productType)
+            {
+                $editableProductTypes[$productType->handle] = array('productType' => $productType);
+                $productTypes[] = $productType;
+
+                // Find total products
+                $criteria = craft()->elements->getCriteria('Commerce_Product');
+                $criteria->typeId = $productType->id;
+                $count = $criteria->count();
+
+                $productTypeCount[$productType->handle] = $count;
+            }
+        }
+
         return craft()->templates->render('cachewarmer/_settings', array(
             'settings' => $this->getSettings(),
             'sections' => $sections,
             'sectionCount' => $sectionCount,
+            'productTypes' => (isset($productTypes)) ? $productTypes : array(),
+            'productTypeCount' => (isset($productTypeCount)) ? $productTypeCount : 0,
         ));
     }
 }

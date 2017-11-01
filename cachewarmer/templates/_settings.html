@@ -21,7 +21,10 @@
     errors: settings.getErrors('parallelRequests')
 }) }}
 
+
 {% set key = settings.key ? settings.key : '1234567890' %}
+
+    <h3>Sections</h3>
 
     <div id="nosections"{% if sections %} class="hidden"{% endif %}>
         <p>{{ "No sections exist yet."|t }}</p>
@@ -62,7 +65,47 @@
             </tbody>
         </table>
     {% endif %}
-    
+
+    {% set commercePlugin = craft.plugins.getPlugin('commerce') %}
+
+    {% if commercePlugin %}
+        <br>
+        <h3>Product Types</h3>
+
+        <div id="noproductTypes"{% if productTypes %} class="hidden"{% endif %}>
+            <p>{{ "No product types exist yet."|t }}</p>
+        </div>
+
+        {% if productTypes|length %}
+            <table id="productTypes" class="data fullwidth collapsible">
+                <thead>
+                    <th scope="col" class="thin">Include</td>
+                    <th scope="col">{{ "Name"|t }}</th>
+                    <th scope="col">{{ "Products"|t }}</th>
+                </thead>
+                <tbody>
+                    {% for productType in productTypes %}
+                        {% set id = productType.id %}
+                        {% set handle = productType.handle %}
+                        {% set productTypeSettings = settings.enabledProductTypes[id] is defined ? settings.enabledProductTypes[id] : false %}
+                        <tr data-id="{{ productType.id }}" data-name="{{ productType.name|t }}">
+                            <td class="thin">
+                                {% set fieldname = 'enabledProductTypes[' ~ id ~ '][enabled]' %}
+                                {% set enabled = (productTypeSettings.enabled is defined and productTypeSettings.enabled is not empty ? productTypeSettings.enabled : false) %}
+                                {{ forms.lightswitch({
+                                    name: fieldname,
+                                    on:   enabled,
+                                }) }}
+                            </td>
+                            <th scope="row" data-title="{{ 'Name'|t }}"><a href="{{ url('commerce/settings/producttypes/' ~ productType.id) }}">{{ productType.name|t }}</a></th>
+                            <td data-title="{{ 'Entries'|t }}">{{ productTypeCount[handle] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
+
     <hr>
 
     <h2>Examples</h2>
