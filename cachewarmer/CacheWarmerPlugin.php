@@ -57,6 +57,10 @@ class CacheWarmerPlugin extends BasePlugin
                 'required' => true,
                 'default' => 20,
             ),
+            'sslBundlePath' => array(
+                AttributeType::String,
+                'required' => false,
+            ),
         );
     }
 

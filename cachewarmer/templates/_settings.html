@@ -21,6 +21,16 @@
     errors: settings.getErrors('parallelRequests')
 }) }}
 
+{{ forms.textField({
+    label: "SSL Bundle Path"|t,
+    id: 'sslBundlePath',
+    name: 'sslBundlePath',
+    instructions: "(Optional) Path to your SSL bundle file, useful if getting *[curl] 60: SSL certificate problem*"|t,
+    value: settings.sslBundlePath,
+    autofocus: true,
+    errors: settings.getErrors('sslBundlePath')
+}) }}
+
 
 {% set key = settings.key ? settings.key : '1234567890' %}
 

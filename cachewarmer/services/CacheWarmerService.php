@@ -69,6 +69,13 @@ class CacheWarmerService extends BaseApplicationComponent
             // Create client
             $client = new Guzzle();
 
+            // If the SSL bundle path is specified, use it to verify guzzle requests
+            $bundlePath = $this->settings->sslBundlePath;
+            if ($bundlePath) 
+            {
+                $client->setDefaultOption('verify', $bundlePath);
+            }
+
             // Create a new pool and send off requests, 20 at a time
             $transferStrategy = new BatchRequestTransfer($this->settings->parallelRequests);
             $divisorStrategy = $transferStrategy;
