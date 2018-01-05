@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="571px" height="523px" viewBox="0 0 571 523" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>fire</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <ellipse id="path-1" cx="519.322196" cy="58.6727356" rx="50" ry="58.5"></ellipse>
+        <ellipse id="path-3" cx="519.322196" cy="58.6727356" rx="50" ry="58.5"></ellipse>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="fire" transform="translate(-15.000000, 0.000000)">
+            <g id="log" transform="translate(287.991585, 384.917605) rotate(-20.000000) translate(-287.991585, -384.917605) translate(2.991585, 325.917605)">
+                <rect id="Rectangle" fill="#9C6227" x="49" y="3.41060513e-13" width="472" height="117"></rect>
+                <rect id="Rectangle-Copy-2" fill="#915926" x="41" y="59" width="472" height="58"></rect>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Oval-Copy" fill="#9C6227" xlink:href="#path-1"></use>
+                <rect id="Rectangle-Copy" fill="#915926" mask="url(#mask-2)" x="41" y="59" width="554" height="58"></rect>
+                <g id="Group">
+                    <ellipse id="Oval" fill="#F2B643" cx="50" cy="58.5" rx="50" ry="58.5"></ellipse>
+                    <ellipse id="Oval-Copy-2" fill="#D89932" cx="50.5" cy="58.5" rx="29.5" ry="34.5"></ellipse>
+                </g>
+            </g>
+            <g id="log" transform="translate(312.991585, 384.917605) scale(-1, 1) rotate(-20.000000) translate(-312.991585, -384.917605) translate(27.991585, 325.917605)">
+                <rect id="Rectangle" fill="#9C6227" x="49" y="3.41060513e-13" width="472" height="117"></rect>
+                <rect id="Rectangle-Copy-2" fill="#915926" x="41" y="59" width="472" height="58"></rect>
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <use id="Oval-Copy" fill="#9C6227" xlink:href="#path-3"></use>
+                <rect id="Rectangle-Copy" fill="#915926" mask="url(#mask-4)" x="41" y="59" width="554" height="58"></rect>
+                <g id="Group">
+                    <ellipse id="Oval" fill="#F2B643" cx="50" cy="58.5" rx="50" ry="58.5"></ellipse>
+                    <ellipse id="Oval-Copy-2" fill="#D89932" cx="50.5" cy="58.5" rx="29.5" ry="34.5"></ellipse>
+                </g>
+            </g>
+            <g id="flame" transform="translate(164.000000, 0.000000)">
+                <path d="M145.309329,370 C233.651387,370 276,304 276,220.589198 C276,185.25 245,139 223.5,115 C209.166667,99 190.166667,80.8333333 166.5,60.5 C176.166667,89.7921807 181,111.958847 181,127 C181,136 170.55401,165 162.5,162.5 C154.44599,160 147.210499,155.059629 145.309329,109.5 C143.551555,67.3767049 127.115112,31.0433715 96,0.5 C81.7337972,54.7807128 66.7337972,90.2807128 51,107 C15.0750973,145.175067 1.77457073e-15,187.820651 0,220.589198 C0,317.8527 56.9672705,370 145.309329,370 Z" id="Oval-2-Copy-2" fill="#F13B37"></path>
+                <path d="M140.18952,349 C178.746522,349 222.001009,314.124762 235,278 C242.518576,257.105551 236.685242,222.772217 217.5,175 C221.491124,225 198.491124,250 148.5,250 C98.5088757,250 78.3422091,213.166667 88,139.5 C50.3333333,172.833333 33.8333333,214.166667 38.5,263.5 C42.9435867,310.47506 96.1536126,349 140.18952,349 Z" id="Oval-2-Copy" fill="#FD683D"></path>
+                <path d="M127,329.5 C170.158282,329.5 203,311 203,279.516729 C203,248.033457 179.870177,279.516729 136.711896,279.516729 C93.5536144,279.516729 73.5,257.582612 73.5,279.516729 C73.5,313.370245 107.796793,329.5 127,329.5 Z" id="Oval-2" fill="#FE7F4A"></path>
+            </g>
+        </g>
+    </g>
+</svg>
